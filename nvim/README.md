@@ -1,5 +1,7 @@
 # My coding environment
 
+> <leader> is the Space Key
+
 ## Principles
 
 1. Fast and reliable editor (neovim)
@@ -20,8 +22,8 @@ I use Telescope as a fuzzy finder.
 
 I use vim motions to navigate. These are the most used ones:
 
-- `<leader>u`: scroll up
-- `<leader>d`: scroll down
+- `<ctrl>u`: scroll up
+- `<ctrl>d`: scroll down
 
 ### Navigate between files
 
