@@ -49,11 +49,11 @@ return {
 				end
 
 				map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-				map("gr", vim.lsp.buf.references, "[G]oto [R]eferences")
+				map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+				map("gR", vim.lsp.buf.references, "[G]oto [R]eferences")
 				map("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
 				map("<leader>ws", vim.lsp.buf.workspace_symbol, "[W]orkspace [S]ymbols")
 				map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-				map("<leader>a", vim.lsp.buf.code_action, "[C]ode [A]ction")
 				map("<leader>d", vim.lsp.buf.hover, "Hover Documentation")
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 			end)

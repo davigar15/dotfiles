@@ -19,4 +19,5 @@ ln -s `pwd`/nvim ~/.config/nvim
 ln -s `pwd`/tmux ~/.config/tmux
 ln -s `pwd`/gh ~/.config/gh
 ln -s `pwd`/aerospace ~/.config/aerospace
+ln -s `pwd`/ghostty ~/.config/ghostty
 ```
