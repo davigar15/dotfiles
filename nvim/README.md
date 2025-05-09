@@ -1,6 +1,6 @@
 # My coding environment
 
-> <leader> is the Space Key
+> \<leader> is the Space Key
 
 ## Principles
 
