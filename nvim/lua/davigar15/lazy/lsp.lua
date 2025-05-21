@@ -1,4 +1,37 @@
 return {
+	-- DIAGNOSTICS
+	{
+		"folke/trouble.nvim",
+		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>xs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+		},
+	},
+	-- FORMATTING
+	{
+		"stevearc/conform.nvim",
+		opts = {},
+		config = function()
+			require("conform").setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
+					python = { "ruff_format" },
+				},
+				format_on_save = { timeout_ms = 1000 },
+			})
+		end,
+	},
+	-- LSP
 	{
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v3.x",
@@ -48,14 +81,14 @@ return {
 					vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
 				end
 
-				map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+				map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 				map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-				map("gR", vim.lsp.buf.references, "[G]oto [R]eferences")
-				map("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+				-- map("gR", vim.lsp.buf.references, "[G]oto [R]eferences")
+				map("gi", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
 				map("<leader>ws", vim.lsp.buf.workspace_symbol, "[W]orkspace [S]ymbols")
 				map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 				map("<leader>d", vim.lsp.buf.hover, "Hover Documentation")
-				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 			end)
 
 			lsp.setup()
