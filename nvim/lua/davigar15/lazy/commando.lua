@@ -19,6 +19,11 @@ return {
             vim.keymap.set("n", "<leader>ck", function() commando.run(3) end)
             vim.keymap.set("n", "<leader>cl", function() commando.run(4) end)
             vim.keymap.set("n", "<leader>c;", function() commando.run(5) end)
+            vim.keymap.set(
+                "n",
+                "<leader>cc",
+                function() commando.run_latest() end
+            )
         end,
     },
 }
