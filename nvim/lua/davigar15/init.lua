@@ -4,6 +4,7 @@ require("davigar15.lazy_init")
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local yank_group = augroup("HighlightYank", {})
+local lsp_group = augroup("LspGroup", {})
 
 autocmd("TextYankPost", {
     group = yank_group,
@@ -13,6 +14,32 @@ autocmd("TextYankPost", {
             higroup = "IncSearch",
             timeout = 40,
         })
+    end,
+})
+autocmd("LspAttach", {
+    group = lsp_group,
+    callback = function(e)
+        local opts = { buffer = e.buf }
+
+        vim.keymap.set(
+            "n",
+            "gd",
+            require("telescope.builtin").lsp_definitions,
+            opts
+        )
+        vim.keymap.set(
+            "n",
+            "gr",
+            require("telescope.builtin").lsp_references,
+            opts
+        )
+        vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+        vim.keymap.set("n", "]", vim.diagnostic.goto_next, opts)
+        vim.keymap.set("n", "[", vim.diagnostic.goto_prev, opts)
     end,
 })
 

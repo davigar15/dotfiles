@@ -1,3 +1,9 @@
+
+
+local function is_pr_buffer()
+  local name = vim.api.nvim_buf_get_name(0)
+  return name:match("octo://.*/pull/%d+")
+end
 return {
     "pwntester/octo.nvim",
     dependencies = {
@@ -32,6 +38,17 @@ return {
                     "#<C-x><C-o>",
                     { silent = true, buffer = true }
                 )
+                vim.keymap.set("n", "<leader>r", function()
+
+
+                    if is_pr_buffer() then
+                        vim.cmd("Octo comment add")
+                        vim.defer_fn(function()
+                            vim.api.nvim_put({"/gcbrun"}, "", true, true) -- insert /gcbrun
+                            vim.cmd("w") -- save and close buffer
+                        end, 200) -- wait 200ms for Octo buffer to open
+                    end
+                end)
             end,
         })
     end,
